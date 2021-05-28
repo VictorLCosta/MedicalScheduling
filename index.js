@@ -10,6 +10,10 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+app.get("/", (req, res) => {
+    res.render("create")
+});
+
 mongoose.connect("mongodb://localhost:27017/scheduling", {useNewUrlParser: true, useUnifiedTopology: true})
 
 app.listen(8080, () => {
