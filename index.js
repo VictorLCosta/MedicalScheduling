@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const appointmentService = require("./repositories/AppointmentRepository");
+const appointmentRepo = require("./repositories/AppointmentRepository");
 
 app.set("view engine", "ejs");
 
@@ -16,12 +16,18 @@ app.get("/", (req, res) => {
     res.render("index")
 });
 
+app.get("/getcalendar", async (req, res) => {
+    var consult = await appointmentRepo.getAll(false);
+
+    res.json(consult);
+});
+
 app.get("/create", (req, res) => {
     res.render("create")
 });
 
 app.post("/create", async (req, res) => {
-    var result = await appointmentService.Create(
+    var result = await appointmentRepo.Create(
         req.body.name,
         req.body.email,
         req.body.desc,

@@ -1,5 +1,7 @@
 var appointment = require("../models/Appointment");
+var appointmentFactory = require("../factories/AppointmentFactory")
 var moongose = require("mongoose");
+const AppointmentFactory = require("../factories/AppointmentFactory");
 
 const model = moongose.model("Appointment", appointment)
 
@@ -21,6 +23,23 @@ class AppointmentRepository
         } catch (error) {
             console.log(error);
             return false;
+        }
+    }
+
+    async getAll(showFinished){
+        if(showFinished){
+            return await model.find();
+        } else {
+            var appos = await model.find({'finished': false});
+            var appointments = [];
+
+            appos.forEach(appo => {
+                if(appo.date != undefined){
+                    appointments.push(AppointmentFactory.Build(appo));
+                }
+            });
+
+            return appointments;
         }
     }
 }
