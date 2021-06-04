@@ -26,7 +26,7 @@ class AppointmentRepository
         }
     }
 
-    async getAll(showFinished){
+    async GetAll(showFinished){
         if(showFinished){
             return await model.find();
         } else {
@@ -40,6 +40,16 @@ class AppointmentRepository
             });
 
             return appointments;
+        }
+    }
+
+    async GetById(id){
+        try {
+            var event = await model.findById(id);
+
+            return event;
+        } catch (error) {
+            console.log(error);
         }
     }
 }

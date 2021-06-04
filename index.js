@@ -17,9 +17,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/getcalendar", async (req, res) => {
-    var consult = await appointmentRepo.getAll(false);
+    var consult = await appointmentRepo.GetAll(false);
 
     res.json(consult);
+});
+
+app.get("/event/:id", async (req, res) => {
+    var appointment = await appointmentRepo.GetById(req.params.id);
+
+    res.render("event", {appo: appointment});
 });
 
 app.get("/create", (req, res) => {
