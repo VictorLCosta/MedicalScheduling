@@ -13,7 +13,8 @@ class AppointmentFactory{
             id: appointment._id,
             title: appointment.name + " - " + appointment.desc,
             start: startDate,
-            end: startDate
+            end: startDate,
+            finished: appointment.finished
         }
 
         return appo;

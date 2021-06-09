@@ -32,6 +32,14 @@ app.get("/create", (req, res) => {
     res.render("create")
 });
 
+app.post("/finish", async (req, res) => {
+    var id = req.body.id;
+
+    await appointmentRepo.Finish(id);
+
+    res.redirect("/")
+});
+
 app.post("/create", async (req, res) => {
     var result = await appointmentRepo.Create(
         req.body.name,
@@ -48,7 +56,8 @@ app.post("/create", async (req, res) => {
     }
 });
 
-mongoose.connect("mongodb://localhost:27017/scheduling", {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect("mongodb://localhost:27017/scheduling", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.set("useFindAndModify", false)
 
 app.listen(8080, () => {
     console.log("Server rodando");

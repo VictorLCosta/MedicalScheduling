@@ -52,6 +52,16 @@ class AppointmentRepository
             console.log(error);
         }
     }
+
+    async Finish(id){
+        try{
+            model.findByIdAndUpdate(id, {finished: true});
+            return true;
+        } catch (err) {
+            console.log(err);
+            return false;
+        }
+    }
 }
 
 module.exports = new AppointmentRepository();
