@@ -22,6 +22,11 @@ app.get("/getcalendar", async (req, res) => {
     res.json(consult);
 });
 
+app.get("/list", async (req, res) => {
+    var appos = await appointmentRepo.GetAll(true);
+    res.render("list", {appos})
+});
+
 app.get("/event/:id", async (req, res) => {
     var appointment = await appointmentRepo.GetById(req.params.id);
 
