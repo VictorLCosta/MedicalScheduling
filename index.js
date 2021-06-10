@@ -22,6 +22,12 @@ app.get("/getcalendar", async (req, res) => {
     res.json(consult);
 });
 
+app.get("/search", async (req, res) => {
+    var search = req.query.search;
+
+    res.json(await appointmentRepo.Search(search));
+});
+
 app.get("/list", async (req, res) => {
     var appos = await appointmentRepo.GetAll(true);
     res.render("list", {appos})

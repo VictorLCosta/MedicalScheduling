@@ -62,6 +62,16 @@ class AppointmentRepository
             return false;
         }
     }
+
+    async Search(query){
+        try {
+            var appos = await model.find().or({email: query}, {cpf: query});
+
+            return appos;
+        } catch (error) {
+            console.log(error);
+        }        
+    }
 }
 
 module.exports = new AppointmentRepository();
