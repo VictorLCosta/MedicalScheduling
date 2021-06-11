@@ -14,7 +14,8 @@ class AppointmentRepository
             desc,
             cpf,
             date,
-            finished: false
+            finished: false,
+            notified: false
         });
 
         try {
@@ -71,6 +72,11 @@ class AppointmentRepository
         } catch (error) {
             console.log(error);
         }        
+    }
+
+    async SendNotification(){
+        var appos = await this.GetAll(false);
+        console.log(appos);
     }
 }
 

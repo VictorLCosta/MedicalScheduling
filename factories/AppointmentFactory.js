@@ -14,7 +14,8 @@ class AppointmentFactory{
             title: appointment.name + " - " + appointment.desc,
             start: startDate,
             end: startDate,
-            finished: appointment.finished
+            finished: appointment.finished,
+            notified: appointment.notified
         }
 
         return appo;

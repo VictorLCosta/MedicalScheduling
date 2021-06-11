@@ -67,6 +67,12 @@ app.post("/create", async (req, res) => {
     }
 });
 
+var poolInterval = 3000;
+
+setInterval(async () => {
+    await appointmentRepo.SendNotification();
+}, poolInterval);
+
 mongoose.connect("mongodb://localhost:27017/scheduling", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set("useFindAndModify", false)
 
