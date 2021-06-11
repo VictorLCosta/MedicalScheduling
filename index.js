@@ -70,7 +70,19 @@ app.post("/create", async (req, res) => {
 var poolInterval = 3000;
 
 setInterval(async () => {
-    await appointmentRepo.SendNotification();
+    var appos = await appointmentRepo.SendNotification();
+    appos.forEach(appo => {
+        var date = appo.date.getTime();
+
+        var hour = 1000 * 60 * 60;
+
+        var gap = date - Date.now();
+
+        if(gap <= hour){
+            console.log(appo.title);
+        }
+    });
+
 }, poolInterval);
 
 mongoose.connect("mongodb://localhost:27017/scheduling", {useNewUrlParser: true, useUnifiedTopology: true});
